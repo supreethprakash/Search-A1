@@ -22,9 +22,11 @@ import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.MultiFields;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.index.Terms;
+import org.apache.lucene.index.TermsEnum;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.BytesRef;
 
 public class generateIndex {
 
@@ -106,6 +108,15 @@ public class generateIndex {
 		    System.out.println("Number of documents that have at least one term for this field: "+vocabulary.getDocCount());
 		    System.out.println("Number of tokens for this field: "+vocabulary.getSumTotalTermFreq());
 		    System.out.println("Number of postings for this field: "+vocabulary.getSumDocFreq());
+		    
+		    TermsEnum iterator = vocabulary.iterator();
+		    BytesRef byteRef = null;
+		    System.out.println("\n*******Vocabulary-Start**********");
+		    while((byteRef = iterator.next()) != null) {
+		    	String term = byteRef.utf8ToString();
+		    	System.out.print(term+"\t");
+		    }
+		    System.out.println("\n*******Vocabulary-End**********");
 		}
 	}
 	
