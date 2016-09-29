@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -44,8 +45,8 @@ public class generateIndex {
 		IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
 		iwc.setOpenMode(OpenMode.CREATE);
 		
-		Path corpusDir = Paths.get("//Users//supreethks//Downloads//corpus");
-		Directory outputFolder = FSDirectory.open(Paths.get("//Volumes//Multimedia//Search//Search//output"));
+		Path corpusDir = Paths.get("src//corpus");
+		Directory outputFolder = FSDirectory.open(Paths.get("src//output"));
 		IndexWriter writer = new IndexWriter(outputFolder,iwc);
 		try(DirectoryStream<Path> allFiles = Files.newDirectoryStream(corpusDir, "*.trectext")){
 
@@ -98,7 +99,7 @@ public class generateIndex {
 			writer.forceMerge(1); //Merging all the segments to one.
 			writer.close();
 			
-			IndexReader fileIO = DirectoryReader.open(FSDirectory.open(Paths.get("//Volumes//Multimedia//Search//Search//output")));
+			IndexReader fileIO = DirectoryReader.open(FSDirectory.open(Paths.get("src//output")));
 			
 			System.out.println("No of documents in the corpus: "+fileIO.maxDoc());
 		    System.out.println("Number of documents containing the term \"new\" for field \"TEXT\": "+fileIO.docFreq(new Term("TEXT", "new")));
