@@ -51,9 +51,9 @@ public class indexComparison {
 		Analyzer analyzer;
 		if(option == 1){
 			analyzer = new StandardAnalyzer();
-		} else if (option == 2) {
-			analyzer = new KeywordAnalyzer();
 		} else if (option == 3) {
+			analyzer = new KeywordAnalyzer();
+		} else if (option == 2) {
 			analyzer = new StopAnalyzer();
 		} else {
 			analyzer = new SimpleAnalyzer(); 
@@ -84,14 +84,14 @@ public class indexComparison {
 				
 				Matcher documentMatcher = docTags.matcher(content);
 				getStrings(documentMatcher,2, documentList);
-				
-				Matcher textMatcher = textTag.matcher(documentList.get(0));
-				Matcher docNoMatcher = docNoData.matcher(documentList.get(0));
-				Matcher headMatcher = headData.matcher(documentList.get(0));
-				Matcher dataLineMatcher = dataLineData.matcher(documentList.get(0));
-				Matcher byLineMatcher = byLineData.matcher(documentList.get(0));
 
 				for (String document: documentList) {
+					
+					Matcher textMatcher = textTag.matcher(document);
+					Matcher docNoMatcher = docNoData.matcher(document);
+					Matcher headMatcher = headData.matcher(document);
+					Matcher dataLineMatcher = dataLineData.matcher(document);
+					Matcher byLineMatcher = byLineData.matcher(document);
 					
 					Matcher docMatch = docTags.matcher(document);
 					documentData = getStrings(docMatch,1, null);
@@ -139,6 +139,7 @@ public class indexComparison {
 		    }
 		    
 		    System.out.println("\n*******Vocabulary-End**********");
+		    
 		}
 	}
 	
