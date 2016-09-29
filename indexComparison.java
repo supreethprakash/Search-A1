@@ -54,9 +54,9 @@ public class indexComparison {
 		} else if (option == 3) {
 			analyzer = new KeywordAnalyzer();
 		} else if (option == 2) {
-			analyzer = new StopAnalyzer();
+			analyzer = new SimpleAnalyzer();
 		} else {
-			analyzer = new SimpleAnalyzer(); 
+			analyzer = new StopAnalyzer(); 
 		}
 		
 		System.out.println("Please wait. Process is going on\n");
